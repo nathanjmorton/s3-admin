@@ -1,0 +1,1 @@
+aws s3 sync s3://ardanlabslms-bucket s3://nathanjmorton-ardanlabslms-bucket --copy-props none
