@@ -5,7 +5,12 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-BUCKET_NAME="$1"
+BUCKET_NAME="nathanjmorton-$1"
+
+if aws s3api head-bucket --bucket "$BUCKET_NAME" >/dev/null 2>&1; then
+  echo "Bucket '$BUCKET_NAME' already exists. Exiting."
+  exit 0
+fi
 
 aws s3api create-bucket --bucket "$BUCKET_NAME"
 
