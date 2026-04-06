@@ -2,6 +2,14 @@
 
 A collection of AWS S3 utility scripts for common bucket administration tasks, wrapped in a `Makefile` for easy invocation.
 
+## Quick Setup
+
+```sh
+make setup BUCKET=<bucket-name>
+```
+
+---
+
 ## Prerequisites
 
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) installed and configured

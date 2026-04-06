@@ -1,4 +1,4 @@
-.PHONY: help create-bucket set-policy sync
+.PHONY: help create-bucket set-policy sync setup
 
 # Default target: show help
 help:
@@ -26,6 +26,10 @@ help:
 	@echo "      s3://nathanjmorton-<bucket-name> (no property copying)."
 	@echo "      Example: make sync BUCKET=my-source-bucket"
 	@echo ""
+	@echo "  setup          BUCKET=<name>"
+	@echo "      Runs create-bucket, set-policy, and sync in sequence."
+	@echo "      Example: make setup BUCKET=my-new-bucket"
+	@echo ""
 
 create-bucket:
 ifndef BUCKET
@@ -44,3 +48,11 @@ ifndef BUCKET
 	$(error BUCKET is required. Usage: make sync BUCKET=<bucket-name>)
 endif
 	bash s3-synch.sh $(BUCKET)
+
+setup:
+ifndef BUCKET
+	$(error BUCKET is required. Usage: make setup BUCKET=<bucket-name>)
+endif
+	$(MAKE) create-bucket BUCKET=$(BUCKET)
+	$(MAKE) set-policy BUCKET=$(BUCKET)
+	$(MAKE) sync BUCKET=$(BUCKET)
