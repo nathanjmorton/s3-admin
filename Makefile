@@ -53,6 +53,6 @@ setup:
 ifndef BUCKET
 	$(error BUCKET is required. Usage: make setup BUCKET=<bucket-name>)
 endif
-	$(MAKE) create-bucket BUCKET=$(BUCKET)
-	$(MAKE) set-policy BUCKET=$(BUCKET)
-	$(MAKE) sync BUCKET=$(BUCKET)
+	bash s3-make-bucket-with-intelligent-tiering.sh $(BUCKET)
+	bash s3-bucket-policy.sh $(BUCKET)
+	bash s3-synch.sh $(BUCKET)
